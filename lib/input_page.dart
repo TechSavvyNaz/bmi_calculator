@@ -1,70 +1,24 @@
 import 'package:flutter/material.dart';
 
-class InputPage extends StatefulWidget {
-  const InputPage({super.key});
+class RepeatContainerCode extends StatelessWidget {
+  final Color color;
+  final Widget? child;
 
-  @override
-  _InputPageState createState() => _InputPageState();
-}
+  const RepeatContainerCode({
+    Key? key,
+    this.color = const Color(0xFF1D1E33),
+    this.child,
+  }) : super(key: key);
 
-class _InputPageState extends State<InputPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('BMI Calculator'),
+    return Container(
+      margin: const EdgeInsets.all(15.0),
+      decoration: BoxDecoration(
+        color: color,
+        borderRadius: BorderRadius.circular(10.0),
       ),
-      body: Column(
-        children: <Widget>[
-          Expanded(
-            child: Row(
-              children: [
-                Expanded(child: Container(
-                  margin: EdgeInsets.all(15.0),
-                  decoration: BoxDecoration(
-                    color: Color(0xFF1D1E33),
-                    borderRadius:BorderRadius.circular(10.0) ,
-                  ),
-                )), // Replace null with Container()
-                Expanded(child: Container(
-                  margin: EdgeInsets.all(15.0),
-                  decoration: BoxDecoration(
-                    color: Color(0xFF1D1E33),
-                    borderRadius:BorderRadius.circular(10.0) ,
-                  ),
-                )), // Replace null with Container()
-              ],
-            ),
-          ),
-          Expanded(child: Container(
-            margin: EdgeInsets.all(15.0),
-            decoration: BoxDecoration(
-              color: Color(0xFF1D1E33),
-              borderRadius:BorderRadius.circular(10.0) ,
-            ),
-          )),
-          Expanded(
-            child: Row(
-              children: [
-                Expanded(child: Container(
-                  margin: EdgeInsets.all(15.0),
-                  decoration: BoxDecoration(
-                    color: Color(0xFF1D1E33),
-                    borderRadius:BorderRadius.circular(10.0) ,
-                  ),
-                )),
-                Expanded(child: Container(
-                  margin: EdgeInsets.all(15.0),
-                  decoration: BoxDecoration(
-                    color: Color(0xFF1D1E33),
-                    borderRadius:BorderRadius.circular(10.0) ,
-                  ),
-                )),
-              ],
-            ),
-          ),
-        ],
-      ),
+      child: child,
     );
   }
 }
