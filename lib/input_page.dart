@@ -8,7 +8,6 @@ class InputPage extends StatefulWidget {
   @override
   _InputPageState createState() => _InputPageState();
 }
-
 class _InputPageState extends State<InputPage> {
   String selectedGender = '';
   int height = 180;
