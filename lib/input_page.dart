@@ -9,7 +9,7 @@ class InputPage extends StatefulWidget {
 
 class _InputPageState extends State<InputPage> {
   String selectedGender = '';
-  int height = 180;
+  int height = 120;
   int weight = 60;
   int age = 20;
 
@@ -133,7 +133,7 @@ class _InputPageState extends State<InputPage> {
                     Slider(
                       value: height.toDouble(),
                       min: 100.0,
-                      max: 180.0,
+                      max: 240.0,
                       activeColor: Colors.pink,
                       inactiveColor: Color(0xFF8D8E98),
                       onChanged: (double newValue) {
