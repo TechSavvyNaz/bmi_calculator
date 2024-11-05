@@ -8,6 +8,7 @@ class InputPage extends StatefulWidget {
   @override
   _InputPageState createState() => _InputPageState();
 }
+
 class _InputPageState extends State<InputPage> {
   String selectedGender = '';
   int height = 150;
@@ -29,7 +30,7 @@ class _InputPageState extends State<InputPage> {
             Expanded(
               child: GenderSelection(
                 selectedGender: selectedGender,
-                onGenderSelected: (String gender) {
+                onGenderSelected: (String gender) { // Function object passed as parameter
                   setState(() {
                     selectedGender = gender;
                   });
@@ -40,7 +41,7 @@ class _InputPageState extends State<InputPage> {
             Expanded(
               child: HeightSlider(
                 height: height,
-                onHeightChanged: (int newHeight) {
+                onHeightChanged: (int newHeight) { // Function object passed as parameter
                   setState(() {
                     height = newHeight;
                   });
@@ -55,12 +56,12 @@ class _InputPageState extends State<InputPage> {
                     child: WeightAgeSelector(
                       label: 'WEIGHT',
                       value: weight,
-                      onIncrement: () {
+                      onIncrement: () { // Function object for incrementing weight
                         setState(() {
                           weight++;
                         });
                       },
-                      onDecrement: () {
+                      onDecrement: () { // Function object for decrementing weight
                         setState(() {
                           if (weight > 0) weight--;
                         });
@@ -71,12 +72,12 @@ class _InputPageState extends State<InputPage> {
                     child: WeightAgeSelector(
                       label: 'AGE',
                       value: age,
-                      onIncrement: () {
+                      onIncrement: () { // Function object for incrementing age
                         setState(() {
                           age++;
                         });
                       },
-                      onDecrement: () {
+                      onDecrement: () { // Function object for decrementing age
                         setState(() {
                           if (age > 0) age--;
                         });
