@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'IconTextFile.dart';
-import 'ContainerFile.dart';
 
 class InputPage extends StatefulWidget {
   const InputPage({super.key});
@@ -11,36 +9,9 @@ class InputPage extends StatefulWidget {
 
 class _InputPageState extends State<InputPage> {
   String selectedGender = '';
-  int height = 150;
+  int height = 180;
   int weight = 60;
   int age = 20;
-
-  // Function to calculate BMI
-  double calculateBMI() {
-    return weight / ((height / 100) * (height / 100));
-  }
-
-  // Function to show BMI result in a dialog
-  void showBMIDialog() {
-    double bmi = calculateBMI();
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Your BMI'),
-          content: Text('Your BMI is ${bmi.toStringAsFixed(2)}'),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: const Text('OK'),
-            ),
-          ],
-        );
-      },
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,101 +19,267 @@ class _InputPageState extends State<InputPage> {
       appBar: AppBar(
         title: const Text('BMI Calculator'),
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              // Gender selection row
-              Row(
+      body: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            // Gender selection row
+            Expanded(
+              child: Row(
                 children: [
                   Expanded(
-                    child: GenderSelection(
-                      selectedGender: selectedGender,
-                      onGenderSelected: (String gender) {
+                    child: GestureDetector(
+                      onTap: () {
                         setState(() {
-                          selectedGender = gender;
+                          selectedGender = 'male';
                         });
                       },
+                      child: RepeatContainerCode(
+                        color: selectedGender == 'male'
+                            ? Colors.blue
+                            : const Color(0xFF1D1E33),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: const [
+                            Icon(
+                              Icons.male,
+                              size: 80.0,
+                              color: Colors.white,
+                            ),
+                            SizedBox(height: 13.0),
+                            Text(
+                              'MALE',
+                              style: TextStyle(
+                                fontSize: 18.0,
+                                color: Color(0xFF8D8E98),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          selectedGender = 'female';
+                        });
+                      },
+                      child: RepeatContainerCode(
+                        color: selectedGender == 'female'
+                            ? Colors.pink
+                            : const Color(0xFF1D1E33),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: const [
+                            Icon(
+                              Icons.female,
+                              size: 80.0,
+                              color: Colors.white,
+                            ),
+                            SizedBox(height: 13.0),
+                            Text(
+                              'FEMALE',
+                              style: TextStyle(
+                                fontSize: 18.0,
+                                color: Color(0xFF8D8E98),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
                   ),
                 ],
               ),
-              const SizedBox(height: 10.0), // Added spacing between rows
-              // Height slider
-              Row(
-                children: [
-                  Expanded(
-                    child: HeightSlider(
-                      height: height,
-                      onHeightChanged: (int newHeight) {
+            ),
+            // Height slider
+            Expanded(
+              child: RepeatContainerCode(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      'HEIGHT',
+                      style: TextStyle(
+                        fontSize: 18.0,
+                        color: Color(0xFF8D8E98),
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.baseline,
+                      textBaseline: TextBaseline.alphabetic,
+                      children: [
+                        Text(
+                          height.toString(),
+                          style: const TextStyle(
+                            fontSize: 30.0,
+                            fontWeight: FontWeight.w900,
+                            color: Colors.white,
+                          ),
+                        ),
+                        const Text(
+                          ' cm',
+                          style: TextStyle(
+                            fontSize: 18.0,
+                            color: Color(0xFFDCDEEC),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Slider(
+                      value: height.toDouble(),
+                      min: 100.0,
+                      max: 180.0,
+                      activeColor: Colors.pink,
+                      inactiveColor: Color(0xFF8D8E98),
+                      onChanged: (double newValue) {
                         setState(() {
-                          height = newHeight;
+                          height = newValue.round();
                         });
                       },
                     ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 10.0), // Added spacing between rows
-              // Weight and Age row
-              Row(
-                children: [
-                  Expanded(
-                    child: WeightAgeSelector(
-                      label: 'WEIGHT',
-                      value: weight,
-                      onIncrement: () {
-                        setState(() {
-                          weight++;
-                        });
-                      },
-                      onDecrement: () {
-                        setState(() {
-                          if (weight > 0) weight--;
-                        });
-                      },
-                    ),
-                  ),
-                  Expanded(
-                    child: WeightAgeSelector(
-                      label: 'AGE',
-                      value: age,
-                      onIncrement: () {
-                        setState(() {
-                          age++;
-                        });
-                      },
-                      onDecrement: () {
-                        setState(() {
-                          if (age > 0) age--;
-                        });
-                      },
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 20.0), // Added spacing before button
-              // Calculate BMI Button
-              Padding(
-                padding: const EdgeInsets.only(top: 10.0),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.red, // Updated to backgroundColor
-                    padding: const EdgeInsets.symmetric(vertical: 15.0),
-                  ),
-                  onPressed: showBMIDialog, // Call function to show BMI dialog
-                  child: const Text(
-                    'Calculate BMI',
-                    style: TextStyle(fontSize: 18.0, color: Colors.white),
-                  ),
+                  ],
                 ),
               ),
-            ],
-          ),
+            ),
+            // Weight and Age row
+            Expanded(
+              child: Row(
+                children: [
+                  Expanded(
+                    child: RepeatContainerCode(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text(
+                            'WEIGHT',
+                            style: TextStyle(
+                              fontSize: 18.0,
+                              color: Color(0xFF8D8E98),
+                            ),
+                          ),
+                          Text(
+                            weight.toString(),
+                            style: const TextStyle(
+                              fontSize: 30.0,
+                              fontWeight: FontWeight.w900,
+                              color: Colors.white,
+                            ),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              FloatingActionButton(
+                                heroTag: 'weight--',
+                                backgroundColor: const Color(0xFF4C4F5E),
+                                onPressed: () {
+                                  setState(() {
+                                    if (weight > 0) weight--;
+                                  });
+                                },
+                                child: const Icon(Icons.remove, color: Colors.white),
+                              ),
+                              const SizedBox(width: 10.0),
+                              FloatingActionButton(
+                                heroTag: 'weight++',
+                                backgroundColor: const Color(0xFF4C4F5E),
+                                onPressed: () {
+                                  setState(() {
+                                    weight++;
+                                  });
+                                },
+                                child: const Icon(Icons.add, color: Colors.white),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: RepeatContainerCode(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text(
+                            'AGE',
+                            style: TextStyle(
+                              fontSize: 18.0,
+                              color: Color(0xFF8D8E98),
+                            ),
+                          ),
+                          Text(
+                            age.toString(),
+                            style: const TextStyle(
+                              fontSize: 20.0,
+                              fontWeight: FontWeight.w900,
+                              color: Colors.white,
+                            ),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              FloatingActionButton(
+                                heroTag: 'age--',
+                                backgroundColor: const Color(0xFF4C4F5E),
+                                onPressed: () {
+                                  setState(() {
+                                    if (age > 0) age--;
+                                  });
+                                },
+                                child: const Icon(Icons.remove, color: Colors.white),
+                              ),
+                              const SizedBox(width: 10.0),
+                              FloatingActionButton(
+                                heroTag: 'age++',
+                                backgroundColor: const Color(0xFF4C4F5E),
+                                onPressed: () {
+                                  setState(() {
+                                    age++;
+                                  });
+                                },
+                                child: const Icon(Icons.add, color: Colors.white),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
+    );
+  }
+}
+
+// Reusable container widget for consistent styling
+class RepeatContainerCode extends StatelessWidget {
+  final Color color;
+  final Widget? child;
+
+  const RepeatContainerCode({
+    Key? key,
+    this.color = const Color(0xFF1D1E33),
+    this.child,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.all(15.0),
+      decoration: BoxDecoration(
+        color: color,
+        borderRadius: BorderRadius.circular(10.0),
+      ),
+      child: child,
     );
   }
 }
