@@ -6,7 +6,6 @@ class GenderSelection extends StatelessWidget {
   final Function(String) onGenderSelected;
 
   const GenderSelection({required this.selectedGender, required this.onGenderSelected});
-
   @override
   Widget build(BuildContext context) {
     return Row(
