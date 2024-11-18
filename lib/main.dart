@@ -1,22 +1,20 @@
 import 'package:flutter/material.dart';
-import 'input_page.dart';
+import 'screens/splash_screen.dart'; // Import your SplashScreen
 
 void main() {
-  runApp(const BMICalculator());
+  runApp(BMICalculatorApp());
 }
 
-class BMICalculator extends StatelessWidget {
-  const BMICalculator({super.key});
-
+class BMICalculatorApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'BMI Calculator',
+      debugShowCheckedModeBanner: false, // Remove the debug banner
       theme: ThemeData.dark().copyWith(
-        primaryColor: const Color(0xFF0A0E21),
-        scaffoldBackgroundColor: const Color(0xFF0A0E21),
+        primaryColor: Color(0xFF0A0E21),
+        scaffoldBackgroundColor: Color(0xFF0A0E21),
       ),
-      home: const InputPage(),
+      home: SplashScreen(),
     );
   }
 }
