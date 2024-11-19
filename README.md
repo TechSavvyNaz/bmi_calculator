@@ -18,6 +18,8 @@ https://youtu.be/QrqR301L8Bk?si=es7dux8go8XviRpI
 ### Result Screen
 ![image](https://github.com/user-attachments/assets/0a438f47-288a-4d9d-a099-d0f441ea40d6)
 
+### Video Recording
+https://github.com/user-attachments/assets/bb984814-3f88-4ea4-a38e-7522e7300c0c
 
 ## Features
 - Select gender (Male or Female)
