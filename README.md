@@ -2,6 +2,10 @@
 
 A Body Mass Index (BMI) Calculator built using Flutter. This application allows users to input their height, weight, and other parameters to calculate and display their BMI along with a personalized health message.
 
+# **File structure and for other details do folow thee  youtube lectures**
+
+
+https://youtu.be/QrqR301L8Bk?si=es7dux8go8XviRpI
 ## Screenshots
 
 ### Splash Screen
